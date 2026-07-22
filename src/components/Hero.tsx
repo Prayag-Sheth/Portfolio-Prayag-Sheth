@@ -49,11 +49,30 @@ function StatIcon({ type }: { type: string }) {
 
 export function Hero() {
   return (
-    <section
-      id="home"
-      className="hero"
-      style={{ backgroundImage: `url(${images.hero})` }}
-    >
+    <section id="home" className="hero">
+      <picture className="hero__media">
+        <source
+          media="(max-width: 900px)"
+          type="image/avif"
+          srcSet={images.heroMobileAvif}
+        />
+        <source
+          media="(max-width: 900px)"
+          type="image/webp"
+          srcSet={images.heroMobile}
+        />
+        <source type="image/avif" srcSet={images.heroAvif} />
+        <source type="image/webp" srcSet={images.hero} />
+        <img
+          className="hero__img"
+          src={images.heroFallback}
+          alt=""
+          width={1672}
+          height={941}
+          decoding="async"
+          fetchPriority="high"
+        />
+      </picture>
       <div className="hero__overlay" />
       <div className="hero__content container">
         <p className="hero__eyebrow">{profile.title}</p>
