@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { images, profile, stats } from "../data/content";
 import { GlassButton } from "./GlassButton";
 import { GitHubIcon, GmailIcon, LinkedInIcon } from "./icons/SocialIcons";
@@ -75,14 +76,25 @@ export function Hero() {
       </picture>
       <div className="hero__overlay" />
       <div className="hero__content container">
-        <p className="hero__eyebrow">{profile.title}</p>
-        <h1 className="hero__title">
+        <p
+          className="hero__eyebrow hero__rise"
+          style={{ "--rise-i": 0 } as CSSProperties}
+        >
+          {profile.title}
+        </p>
+        <h1
+          className="hero__title hero__rise"
+          style={{ "--rise-i": 1 } as CSSProperties}
+        >
           Systems-Focused
           <br />
           Full-Stack Engineer.
         </h1>
 
-        <div className="hero__cta-row">
+        <div
+          className="hero__cta-row hero__rise"
+          style={{ "--rise-i": 2 } as CSSProperties}
+        >
           <GlassButton variant="glass" href="#contact">
             Get in Touch
           </GlassButton>
@@ -126,7 +138,10 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="hero__stats">
+        <div
+          className="hero__stats hero__rise hero__rise--stats"
+          style={{ "--rise-i": 3 } as CSSProperties}
+        >
           {stats.map((stat) => (
             <div key={stat.label} className="hero__stat">
               <span className="hero__stat-icon">

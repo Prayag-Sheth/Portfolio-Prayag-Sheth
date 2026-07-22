@@ -18,6 +18,10 @@
   transform: translateY(-2px);
 }
 
+.glass-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .glass-btn__arrow {
   display: grid;
   place-items: center;

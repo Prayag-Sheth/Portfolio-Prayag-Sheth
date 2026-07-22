@@ -1,0 +1,181 @@
+/* Scroll reveal ----------------------------------------------------------- */
+
+.reveal {
+  --reveal-distance: 24px;
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+.reveal--stagger {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+.reveal--stagger > * {
+  --reveal-distance: 20px;
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition:
+    opacity 0.65s var(--ease),
+    transform 0.65s var(--ease);
+}
+
+.reveal--stagger.is-revealed > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal--stagger.is-revealed > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(2) {
+  transition-delay: 80ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(3) {
+  transition-delay: 160ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(4) {
+  transition-delay: 240ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(5) {
+  transition-delay: 320ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(6) {
+  transition-delay: 400ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(7) {
+  transition-delay: 480ms;
+}
+.reveal--stagger.is-revealed > *:nth-child(8) {
+  transition-delay: 560ms;
+}
+
+@media (max-width: 900px) {
+  .reveal {
+    --reveal-distance: 14px;
+  }
+
+  .reveal--stagger > * {
+    --reveal-distance: 12px;
+  }
+
+  .reveal--stagger.is-revealed > *:nth-child(1) {
+    transition-delay: 0ms;
+  }
+  .reveal--stagger.is-revealed > *:nth-child(2) {
+    transition-delay: 50ms;
+  }
+  .reveal--stagger.is-revealed > *:nth-child(3) {
+    transition-delay: 100ms;
+  }
+  .reveal--stagger.is-revealed > *:nth-child(4) {
+    transition-delay: 150ms;
+  }
+  .reveal--stagger.is-revealed > *:nth-child(5) {
+    transition-delay: 200ms;
+  }
+  .reveal--stagger.is-revealed > *:nth-child(6) {
+    transition-delay: 250ms;
+  }
+}
+
+/* Press / tap feedback ---------------------------------------------------- */
+
+.pressable:active {
+  transform: scale(0.98);
+}
+
+@media (hover: none) {
+  .glass-btn:hover {
+    transform: none;
+  }
+
+  .glass-btn:active {
+    transform: scale(0.98);
+  }
+
+  .services__card:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+  }
+
+  .services__card:active {
+    transform: scale(0.985);
+  }
+
+  .hero__social:hover {
+    transform: none;
+  }
+
+  .hero__social:active {
+    transform: scale(0.94);
+  }
+
+  .testimonials__btn:hover {
+    transform: none;
+  }
+
+  .testimonials__btn:active {
+    transform: scale(0.94);
+  }
+}
+
+@media (hover: hover) {
+  .glass-btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .services__card:active {
+    transform: translateY(-2px) scale(0.985);
+  }
+}
+
+/* Reduced motion ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .reveal.is-revealed,
+  .reveal--stagger.is-revealed > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .glass-btn,
+  .services__card,
+  .hero__social,
+  .testimonials__btn,
+  .pressable {
+    transition: none !important;
+  }
+
+  .glass-btn:hover,
+  .glass-btn:active,
+  .services__card:hover,
+  .services__card:active,
+  .hero__social:hover,
+  .hero__social:active,
+  .testimonials__btn:hover,
+  .testimonials__btn:active,
+  .pressable:active {
+    transform: none !important;
+  }
+}

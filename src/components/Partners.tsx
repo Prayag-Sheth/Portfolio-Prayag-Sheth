@@ -1,4 +1,5 @@
 import { partners } from "../data/content";
+import { Reveal } from "./Reveal";
 import "./Partners.css";
 
 export function Partners() {
@@ -8,23 +9,25 @@ export function Partners() {
   return (
     <section className="partners section" aria-labelledby="partners-title">
       <div className="container">
-        <h2 id="partners-title" className="partners__title">
-          Tech &amp; Tools
-        </h2>
-        <div className="partners__grid partners__grid--cards">
+        <Reveal>
+          <h2 id="partners-title" className="partners__title">
+            Tech &amp; Tools
+          </h2>
+        </Reveal>
+        <Reveal className="partners__grid partners__grid--cards" stagger>
           {row1.map((name) => (
             <div key={name} className="partners__cell partners__cell--card">
               <span>{name}</span>
             </div>
           ))}
-        </div>
-        <div className="partners__grid">
+        </Reveal>
+        <Reveal className="partners__grid" stagger delay={80}>
           {row2.map((name) => (
             <div key={name} className="partners__cell">
               <span>{name}</span>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

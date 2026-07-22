@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { testimonials } from "../data/content";
+import { Reveal } from "./Reveal";
 import "./Testimonials.css";
 
 export function Testimonials() {
@@ -13,16 +14,17 @@ export function Testimonials() {
   return (
     <section id="skills" className="testimonials section">
       <div className="container">
-        <p className="testimonials__eyebrow">Skills</p>
-        <h2 className="heading testimonials__title">
-          Tools I Use to{" "}
-          <span className="accent">Ship Systems</span>
-        </h2>
-        <p className="muted testimonials__subtitle">
-          Languages, platforms, and AI tooling from day-to-day full-stack work.
-        </p>
+        <Reveal>
+          <p className="testimonials__eyebrow">Skills</p>
+          <h2 className="heading testimonials__title">
+            Tools I Use to <span className="accent">Ship Systems</span>
+          </h2>
+          <p className="muted testimonials__subtitle">
+            Languages, platforms, and AI tooling from day-to-day full-stack work.
+          </p>
+        </Reveal>
 
-        <div className="testimonials__grid">
+        <Reveal className="testimonials__grid" stagger key={index}>
           {visible.map((item) => (
             <article key={`${item.name}-${index}`} className="testimonials__card">
               <div className="testimonials__card-top">
@@ -48,7 +50,12 @@ export function Testimonials() {
               </div>
               <p className="testimonials__text">{item.quote}</p>
               <div className="testimonials__author">
-                <img src={item.avatar} alt="" />
+                <img
+                  src={item.avatar}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div>
                   <strong>{item.name}</strong>
                   <span>{item.role}</span>
@@ -56,9 +63,9 @@ export function Testimonials() {
               </div>
             </article>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="testimonials__nav">
+        <Reveal className="testimonials__nav" delay={60}>
           <button
             type="button"
             className="testimonials__btn"
@@ -77,7 +84,7 @@ export function Testimonials() {
           >
             →
           </button>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

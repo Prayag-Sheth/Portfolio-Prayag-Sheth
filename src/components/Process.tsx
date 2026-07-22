@@ -1,5 +1,6 @@
 import { images, processSteps } from "../data/content";
 import { GlassButton } from "./GlassButton";
+import { Reveal } from "./Reveal";
 import "./Process.css";
 
 function StepArrow() {
@@ -22,17 +23,17 @@ export function Process() {
   return (
     <section className="process section">
       <div className="container">
-        <div className="process__header">
+        <Reveal className="process__header">
           <h2 className="heading process__title">
             <span className="accent">How I Build</span>, Simplified.
           </h2>
           <GlassButton variant="purple" href="#about">
             Learn More
           </GlassButton>
-        </div>
+        </Reveal>
 
         <div className="process__grid">
-          <div className="process__steps">
+          <Reveal className="process__steps" stagger>
             {processSteps.map((step) =>
               step.expanded ? (
                 <article key={step.title} className="process__expanded">
@@ -55,14 +56,16 @@ export function Process() {
                 →
               </span>
             </p>
-          </div>
+          </Reveal>
 
-          <div className="process__media">
+          <Reveal className="process__media" delay={140}>
             <img
               src={images.process}
               alt="Engineering collaboration and systems work"
+              loading="lazy"
+              decoding="async"
             />
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -14,6 +14,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  opacity: 0;
+  animation: hero-media-in 1.15s var(--ease) 0.05s both;
 }
 
 .hero__img {
@@ -21,6 +23,27 @@
   height: 100%;
   object-fit: cover;
   object-position: 65% center;
+  transform: scale(1.06);
+  transform-origin: 65% center;
+  animation: hero-kenburns 14s var(--ease) 0.2s both;
+}
+
+@keyframes hero-media-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .hero__overlay {
@@ -47,13 +70,19 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  animation: hero-rise 0.9s var(--ease) both;
+}
+
+.hero__rise {
+  opacity: 0;
+  animation: hero-rise 0.85s var(--ease) both;
+  /* Starts after navbar drop-in so the sequence reads: nav → image → copy */
+  animation-delay: calc(var(--rise-i, 0) * 110ms + 280ms);
 }
 
 @keyframes hero-rise {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
@@ -197,5 +226,36 @@
 
   .hero__cta-row {
     margin-bottom: 40px;
+  }
+
+  /* Lighter stagger on small screens */
+  .hero__rise {
+    animation-duration: 0.7s;
+    animation-delay: calc(var(--rise-i, 0) * 60ms + 180ms);
+  }
+
+  .hero__rise--stats {
+    animation-delay: 280ms;
+  }
+
+  /* Skip slow Ken Burns on phones — fade only */
+  .hero__img {
+    transform: none;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__media,
+  .hero__img {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

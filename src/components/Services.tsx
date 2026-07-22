@@ -1,5 +1,6 @@
 import { profile, services } from "../data/content";
 import { GlassButton } from "./GlassButton";
+import { Reveal } from "./Reveal";
 import "./Services.css";
 
 function ArrowCircle({ light = false }: { light?: boolean }) {
@@ -22,19 +23,18 @@ export function Services() {
   return (
     <section id="experience" className="services section">
       <div className="container">
-        <div className="services__header">
+        <Reveal className="services__header">
           <h2 className="heading services__title">
-            Experience at{" "}
-            <span className="accent">Satva Technolabs</span>
+            Experience at <span className="accent">Satva Technolabs</span>
           </h2>
           <p className="muted services__intro">
             Software Engineer – Full Stack · Jul 2024 – Jul 2026 · Ahmedabad.
             Platforms that <strong>move enterprise data</strong> with
             reliability and speed.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="services__grid">
+        <Reveal className="services__grid" stagger>
           {services.map((service) => (
             <article
               key={service.title}
@@ -46,16 +46,21 @@ export function Services() {
               </div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-              <img src={service.image} alt="" />
+              <img
+                src={service.image}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </article>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="services__cta">
+        <Reveal className="services__cta" delay={100}>
           <GlassButton variant="purple" href={profile.resumeUrl}>
             Download Resume
           </GlassButton>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

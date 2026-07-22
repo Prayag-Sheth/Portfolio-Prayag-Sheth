@@ -1,12 +1,13 @@
 import { education, images, profile } from "../data/content";
 import { GlassButton } from "./GlassButton";
+import { Reveal } from "./Reveal";
 import "./About.css";
 
 export function About() {
   return (
     <section id="about" className="about section">
       <div className="container about__grid">
-        <div className="about__copy">
+        <Reveal className="about__copy">
           <p className="section-label">About me</p>
           <h2 className="heading about__title">
             Meet {profile.name} —{" "}
@@ -27,9 +28,9 @@ export function About() {
           <GlassButton variant="purple" href="#contact">
             Get in Touch
           </GlassButton>
-        </div>
+        </Reveal>
 
-        <div className="about__media">
+        <Reveal className="about__media" delay={120}>
           <p className="about__note">
             Available for full-stack roles building reliable data platforms and
             product experiences.
@@ -38,12 +39,16 @@ export function About() {
             <img
               src={images.about}
               alt={`${profile.name}, Full-Stack Developer`}
+              loading="lazy"
+              decoding="async"
             />
             <aside className="about__float">
               <img
                 src={images.aboutThumb}
                 alt=""
                 className="about__float-thumb"
+                loading="lazy"
+                decoding="async"
               />
               <div>
                 <span className="about__float-kicker">Recognition</span>
@@ -55,7 +60,7 @@ export function About() {
               </div>
             </aside>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

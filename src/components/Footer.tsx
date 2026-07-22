@@ -1,5 +1,6 @@
 import { navLinks, profile } from "../data/content";
 import { GitHubIcon, GmailIcon, LinkedInIcon } from "./icons/SocialIcons";
+import { Reveal } from "./Reveal";
 import "./Footer.css";
 
 export function Footer() {
@@ -8,7 +9,7 @@ export function Footer() {
   return (
     <footer id="contact" className="footer">
       <div className="container">
-        <div className="footer__nav">
+        <Reveal className="footer__nav">
           <nav className="footer__links">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href}>
@@ -22,14 +23,16 @@ export function Footer() {
             </span>
             {profile.email}
           </a>
-        </div>
+        </Reveal>
 
-        <h2 className="footer__wordmark" aria-label={profile.name}>
-          <span>{firstName}</span>
-          <span className="footer__wordmark-fade">{lastName}</span>
-        </h2>
+        <Reveal>
+          <h2 className="footer__wordmark" aria-label={profile.name}>
+            <span>{firstName}</span>
+            <span className="footer__wordmark-fade">{lastName}</span>
+          </h2>
+        </Reveal>
 
-        <div className="footer__bottom">
+        <Reveal className="footer__bottom" delay={80}>
           <div className="footer__legal-left">
             <span>© 2026 {profile.name}</span>
             <a href={`tel:${profile.phone.replace(/\s/g, "")}`}>
@@ -69,7 +72,7 @@ export function Footer() {
             <span>{profile.location}</span>
             <a href={profile.resumeUrl}>Resume</a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );
