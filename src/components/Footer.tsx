@@ -1,4 +1,5 @@
 import { navLinks, profile } from "../data/content";
+import { GitHubIcon, GmailIcon, LinkedInIcon } from "./icons/SocialIcons";
 import "./Footer.css";
 
 export function Footer() {
@@ -17,7 +18,7 @@ export function Footer() {
           </nav>
           <a className="footer__email" href={`mailto:${profile.email}`}>
             <span className="footer__email-icon" aria-hidden>
-              ✉
+              <GmailIcon size={14} />
             </span>
             {profile.email}
           </a>
@@ -42,9 +43,9 @@ export function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="footer__social footer__social--filled"
+              className="footer__social"
             >
-              in
+              <LinkedInIcon size={16} />
             </a>
             <a
               href={profile.github}
@@ -53,14 +54,14 @@ export function Footer() {
               aria-label="GitHub"
               className="footer__social"
             >
-              GH
+              <GitHubIcon size={18} />
             </a>
             <a
               href={`mailto:${profile.email}`}
-              aria-label="Email"
+              aria-label="Gmail"
               className="footer__social"
             >
-              @
+              <GmailIcon size={16} />
             </a>
           </div>
 

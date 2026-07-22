@@ -1,5 +1,6 @@
 import { images, profile, stats } from "../data/content";
 import { GlassButton } from "./GlassButton";
+import { GitHubIcon, GmailIcon, LinkedInIcon } from "./icons/SocialIcons";
 import "./Hero.css";
 
 function StatIcon({ type }: { type: string }) {
@@ -73,6 +74,33 @@ export function Hero() {
           >
             Download Resume
           </GlassButton>
+          <div className="hero__socials" aria-label="Social links">
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="hero__social"
+            >
+              <GitHubIcon size={18} />
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="hero__social"
+            >
+              <LinkedInIcon size={16} />
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              aria-label="Gmail"
+              className="hero__social"
+            >
+              <GmailIcon size={16} />
+            </a>
+          </div>
           <p className="hero__support">
             Building enterprise data pipelines, Kafka-driven integrations, and
             TypeScript backends that turn hours of reporting into seconds.

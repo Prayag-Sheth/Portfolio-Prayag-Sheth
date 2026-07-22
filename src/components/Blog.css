@@ -61,7 +61,12 @@
 .blog__cta {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 40px;
+}
+
+.blog__github-btn .glass-btn__arrow {
+  color: var(--color-purple);
 }
 
 @media (max-width: 900px) {

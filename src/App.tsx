@@ -1,5 +1,6 @@
 import { About } from "./components/About";
 import { Blog } from "./components/Blog";
+import { CustomCursor } from "./components/CustomCursor";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { Navbar } from "./components/Navbar";
@@ -12,6 +13,7 @@ import { Video } from "./components/Video";
 export default function App() {
   return (
     <>
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />

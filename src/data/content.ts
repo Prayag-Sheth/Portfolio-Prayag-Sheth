@@ -45,8 +45,7 @@ export const services = [
     description:
       "Kafka-driven pipeline synchronizing 7 core financial entity types across NetSuite and QuickBooks with resilient bidirectional mapping.",
     active: true,
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+    image: "/exp-kafka.png",
   },
   {
     date: "2024–2026",
@@ -54,8 +53,7 @@ export const services = [
     description:
       "React, Ant Design & Office.js add-in for 50+ users — live P&L, Balance Sheet and Trial Balance in under 5 seconds.",
     active: false,
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
+    image: "/exp-xero-excel.png",
   },
   {
     date: "2024–2026",
@@ -63,8 +61,7 @@ export const services = [
     description:
       "Mobile-first loyalty platform (100+ Figma screens) covering hotel, flight booking and gift card redemption with points.",
     active: false,
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
+    image: "/exp-loyalty.png",
   },
   {
     date: "2024–2026",
@@ -72,8 +69,7 @@ export const services = [
     description:
       "Unified ops layer for a UK skincare brand connecting Xero, HubSpot and Linnworks — 100+ orders/day with live status tracking.",
     active: false,
-    image:
-      "https://images.unsplash.com/photo-1556740758-90de374c12ad?w=600&q=80",
+    image: "/exp-order-sync.png",
   },
 ] as const;
 
@@ -101,24 +97,21 @@ export const blogPosts = [
     title: "Safety Wearable for Industrial Workers",
     excerpt:
       "Zigbee-based wearable to monitor worker safety in high-risk environments, with dashboards for real-time alerts and risk tracking. SIH (G20 Azadi Ka Amrit Mahotsav) winner.",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+    image: "/project-sih.png",
   },
   {
     date: "Satva Technolabs",
     title: "Kafka Financial Integration Platform",
     excerpt:
       "Asynchronous Apache Kafka pipeline normalizing complex transactional payloads into a canonical internal format across NetSuite and QuickBooks.",
-    image:
-      "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&q=80",
+    image: "/project-kafka.png",
   },
   {
     date: "Satva Technolabs",
     title: "Xero Excel Reporting Add-in",
     excerpt:
       "Cut financial report generation from hours to seconds for 50+ in-house users with dynamic date ranges and automatic formatting.",
-    image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+    image: "/project-xero-excel.png",
   },
 ] as const;
 
@@ -128,37 +121,30 @@ export const testimonials = [
       "TypeScript · JavaScript · Python · Node.js · Express.js · Flask · Apache Kafka · Event-Driven Architecture · REST APIs",
     name: "Backend & Architecture",
     role: "Core stack",
-    avatar:
-      "https://images.unsplash.com/photo-1558494949-ef526b394bb8?w=120&q=80",
+    avatar: "/skill-backend.png",
   },
   {
     quote:
       "React.js · TSX · Redux · Ant Design · Office.js · PostgreSQL · MongoDB · Prisma ORM · Docker · Git · Postman",
     name: "Frontend & DevOps",
     role: "Client & data layer",
-    avatar:
-      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=120&q=80",
+    avatar: "/skill-frontend.png",
   },
   {
     quote:
       "Azure OpenAI · Groq API · LLM Integration · Prompt Engineering · AI Agents · Function Calling · RAG · Cursor AI · Claude Code · Codex · MS Power Automate",
     name: "AI & Automation",
     role: "LLM tooling",
-    avatar:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=120&q=80",
+    avatar: "/skill-ai.png",
   },
 ] as const;
 
 export const images = {
-  hero: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&q=80",
-  about:
-    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80",
-  aboutThumb:
-    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=200&q=80",
-  process:
-    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&q=80",
-  video:
-    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1400&q=80",
+  hero: "/hero2.png",
+  about: "/about-main.png",
+  aboutThumb: "/about-sih-thumb.png",
+  process: "/process-how-i-build.png",
+  video: "/project-sih.png",
 } as const;
 
 export const education = {

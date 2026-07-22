@@ -1,6 +1,7 @@
 import { blogPosts, profile } from "../data/content";
-import { GlassButton } from "./GlassButton";
+import { GitHubIcon } from "./icons/SocialIcons";
 import "./Blog.css";
+import "./GlassButton.css";
 
 export function Blog() {
   return (
@@ -8,8 +9,7 @@ export function Blog() {
       <div className="container">
         <p className="blog__eyebrow">Projects</p>
         <h2 className="heading blog__title">
-          Selected Work &amp;{" "}
-          <span className="accent">Impact</span>
+          Selected Work &amp; <span className="accent">Impact</span>
         </h2>
         <p className="muted blog__subtitle">
           From hackathon-winning hardware to enterprise Kafka pipelines and
@@ -28,9 +28,17 @@ export function Blog() {
         </div>
 
         <div className="blog__cta">
-          <GlassButton variant="purple" href={profile.github}>
-            View GitHub
-          </GlassButton>
+          <a
+            className="glass-btn glass-btn--purple blog__github-btn"
+            href={profile.github}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="glass-btn__label">View GitHub</span>
+            <span className="glass-btn__arrow" aria-hidden>
+              <GitHubIcon size={16} />
+            </span>
+          </a>
         </div>
       </div>
     </section>
