@@ -8,7 +8,7 @@ import { Partners } from "./components/Partners";
 import { Process } from "./components/Process";
 import { Services } from "./components/Services";
 import { Testimonials } from "./components/Testimonials";
-import { Video } from "./components/Video";
+// import { Video } from "./components/Video";
 
 export default function App() {
   return (
@@ -21,7 +21,7 @@ export default function App() {
         <About />
         <Services />
         <Process />
-        <Video />
+        {/* <Video /> */}
         <Blog />
         <Testimonials />
       </main>
