@@ -1,0 +1,35 @@
+:root {
+  --color-purple: #7858cb;
+  --color-purple-deep: #5b3db5;
+  --color-purple-soft: #f3f0ff;
+  --color-charcoal: #1a1a1a;
+  --color-ink: #111111;
+  --color-muted: #6b7280;
+  --color-muted-light: #9ca3af;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-white: #ffffff;
+  --color-off-white: #fafafa;
+  --color-hero-overlay: rgba(12, 8, 16, 0.62);
+
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-bg-strong: rgba(255, 255, 255, 0.18);
+  --glass-border: rgba(255, 255, 255, 0.28);
+  --glass-blur: 16px;
+  --glass-light-bg: rgba(255, 255, 255, 0.72);
+  --glass-light-border: rgba(0, 0, 0, 0.08);
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-float: 0 18px 50px rgba(0, 0, 0, 0.12);
+
+  --font: "Plus Jakarta Sans", system-ui, sans-serif;
+  --container: min(1120px, calc(100% - 48px));
+  --nav-height: 72px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

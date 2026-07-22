@@ -1,0 +1,84 @@
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px 10px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    transform 0.35s var(--ease),
+    background 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+  white-space: nowrap;
+}
+
+.glass-btn:hover {
+  transform: translateY(-2px);
+}
+
+.glass-btn__arrow {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.glass-btn--glass {
+  color: var(--color-white);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.glass-btn--glass:hover {
+  background: var(--glass-bg-strong);
+}
+
+.glass-btn--glass .glass-btn__arrow {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-purple);
+}
+
+.glass-btn--glass-light {
+  color: var(--color-charcoal);
+  background: var(--glass-light-bg);
+  border: 1px solid var(--glass-light-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.glass-btn--glass-light .glass-btn__arrow {
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.glass-btn--purple {
+  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-deep) 100%);
+  border: 1px solid transparent;
+  box-shadow: 0 10px 28px rgba(120, 88, 203, 0.35);
+}
+
+.glass-btn--purple:hover {
+  box-shadow: 0 14px 34px rgba(120, 88, 203, 0.45);
+}
+
+.glass-btn--purple .glass-btn__arrow {
+  background: var(--color-white);
+  color: var(--color-purple);
+}
+
+.glass-btn--nav {
+  padding: 12px 22px;
+  gap: 0;
+}
+
+.glass-btn--nav .glass-btn__arrow {
+  display: none;
+}
