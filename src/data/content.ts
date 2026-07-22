@@ -142,8 +142,8 @@ export const testimonials = [
 export const images = {
   hero: "/hero2.webp",
   heroAvif: "/hero2.avif",
-  heroMobile: "/hero2-960.webp",
-  heroMobileAvif: "/hero2-960.avif",
+  heroMobile: "/hero2-mobile.webp",
+  heroMobileAvif: "/hero2-mobile.avif",
   heroFallback: "/hero2.png",
   about: "/about-main.png",
   aboutThumb: "/about-sih-thumb.png",

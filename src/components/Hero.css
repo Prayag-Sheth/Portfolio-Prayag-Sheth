@@ -165,6 +165,27 @@
     align-items: center;
   }
 
+  /* Portrait crop already frames the glass art; keep it centered */
+  .hero__img {
+    object-position: center 42%;
+  }
+
+  /* Stronger full-bleed dim so text stays readable over the sculpture */
+  .hero__overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 8, 14, 0.55) 0%,
+        rgba(10, 8, 14, 0.42) 40%,
+        rgba(10, 8, 14, 0.72) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(10, 8, 14, 0.35) 0%,
+        rgba(10, 8, 14, 0.2) 100%
+      );
+  }
+
   .hero__title {
     max-width: none;
   }
