@@ -93,13 +93,6 @@ export const processSteps = [
 
 export const blogPosts = [
   {
-    date: "Smart India Hackathon",
-    title: "Safety Wearable for Industrial Workers",
-    excerpt:
-      "Zigbee-based wearable to monitor worker safety in high-risk environments, with dashboards for real-time alerts and risk tracking. SIH (G20 Azadi Ka Amrit Mahotsav) winner.",
-    image: "/project-sih.png",
-  },
-  {
     date: "Satva Technolabs",
     title: "Kafka Financial Integration Platform",
     excerpt:
@@ -112,6 +105,13 @@ export const blogPosts = [
     excerpt:
       "Cut financial report generation from hours to seconds for 50+ in-house users with dynamic date ranges and automatic formatting.",
     image: "/project-xero-excel.png",
+  },
+  {
+    date: "Smart India Hackathon",
+    title: "Safety Wearable for Industrial Workers",
+    excerpt:
+      "SIH (G20 Azadi Ka Amrit Mahotsav) hackathon win — a 36-hour Zigbee prototype with real-time safety dashboards. A hardware side-project alongside my core full-stack integration work.",
+    image: "/project-sih.png",
   },
 ] as const;
 
@@ -144,7 +144,7 @@ export const images = {
   about: "/about-main.png",
   aboutThumb: "/about-sih-thumb.png",
   process: "/process-how-i-build.png",
-  video: "/project-sih.png",
+  video: "/project-kafka.png",
 } as const;
 
 export const education = {

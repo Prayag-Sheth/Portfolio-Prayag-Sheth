@@ -12,8 +12,8 @@ export function Blog() {
           Selected Work &amp; <span className="accent">Impact</span>
         </h2>
         <p className="muted blog__subtitle">
-          From hackathon-winning hardware to enterprise Kafka pipelines and
-          Excel automation that cut report time from hours to seconds.
+          Enterprise Kafka pipelines, multi-platform order sync, and Excel
+          automation that cut report time from hours to seconds.
         </p>
 
         <div className="blog__grid">

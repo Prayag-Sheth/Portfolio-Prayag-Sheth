@@ -9,7 +9,7 @@ export function Video() {
           className="video__player"
           style={{ backgroundImage: `url(${images.video})` }}
           role="img"
-          aria-label="Featured project: Safety wearable for industrial workers"
+          aria-label="Featured project: Kafka financial integration platform"
         >
           <button
             type="button"
@@ -21,7 +21,7 @@ export function Video() {
             </svg>
           </button>
           <p className="video__caption">
-            Featured: SIH-winning safety wearable
+            Featured: Kafka financial data platform — NetSuite & QuickBooks sync
           </p>
         </div>
       </div>
