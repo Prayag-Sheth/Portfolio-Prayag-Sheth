@@ -29,14 +29,14 @@
 
 .about__media {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .about__note {
-  position: absolute;
-  top: -8px;
-  right: 0;
+  align-self: flex-end;
   max-width: 200px;
-  margin: 0;
+  margin: 0 0 16px;
   font-size: 0.78rem;
   line-height: 1.45;
   color: var(--color-muted);
@@ -56,7 +56,6 @@
 
 .about__frame {
   position: relative;
-  margin-top: 28px;
   border-radius: var(--radius-xl);
   overflow: visible;
 }
@@ -132,7 +131,7 @@
   }
 
   .about__note {
-    position: static;
+    align-self: stretch;
     text-align: left;
     max-width: none;
     margin-bottom: 12px;
