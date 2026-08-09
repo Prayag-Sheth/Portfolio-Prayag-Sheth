@@ -44,6 +44,11 @@ button {
 
 .section {
   padding: 88px 0;
+  scroll-margin-top: 100px;
+}
+
+#home {
+  scroll-margin-top: 0;
 }
 
 .section-label {

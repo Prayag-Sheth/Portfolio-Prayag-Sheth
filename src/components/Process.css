@@ -107,15 +107,23 @@
 
 .process__media {
   width: 100%;
+  /* TEMP: clip only the baked-in title strip; keep the full diagram visible.
+     Replace with a re-exported asset (no heading) when available. */
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: #f3f4f6;
 }
 
 .process__media img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2 / 1;
   object-fit: contain;
-  border-radius: var(--radius-xl);
+  object-position: center top;
+  border-radius: 0;
+  /* Nudge the duplicate in-image title just out of view */
+  margin-top: -5.5%;
+  margin-bottom: -0.5%;
 }
 
 @media (max-width: 900px) {

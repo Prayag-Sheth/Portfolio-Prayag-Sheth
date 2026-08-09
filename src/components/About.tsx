@@ -18,8 +18,7 @@ export function About() {
             building enterprise data pipelines, backend infrastructure, and
             Kafka-driven integrations using TypeScript and PostgreSQL — with
             optimizations that reduced financial report retrieval from hours to
-            seconds. Based in {profile.location}, currently at{" "}
-            {profile.company}.
+            seconds. Based in {profile.location}.
           </p>
           <p className="muted about__edu">
             {education.degree} · {education.school} (CGPA {education.cgpaDegree}

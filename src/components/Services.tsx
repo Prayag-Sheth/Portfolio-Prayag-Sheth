@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { profile, services } from "../data/content";
 import { GlassButton } from "./GlassButton";
 import { Reveal } from "./Reveal";
@@ -25,10 +26,10 @@ export function Services() {
       <div className="container">
         <Reveal className="services__header">
           <h2 className="heading services__title">
-            Experience at <span className="accent">Satva Technolabs</span>
+            <span className="accent">Professional</span> Experience
           </h2>
           <p className="muted services__intro">
-            Software Engineer – Full Stack · Jul 2024 – Jul 2026 · Ahmedabad.
+            Software Engineer – Full Stack · Jul 2024 – Present · Ahmedabad.
             Platforms that <strong>move enterprise data</strong> with
             reliability and speed.
           </p>
@@ -37,12 +38,18 @@ export function Services() {
         <Reveal className="services__grid" stagger>
           {services.map((service) => (
             <article
-              key={service.title}
+              key={service.slug}
               className={`services__card ${service.active ? "services__card--active" : ""}`}
             >
               <div className="services__card-top">
                 <span className="services__date">{service.date}</span>
-                <ArrowCircle light={service.active} />
+                <Link
+                  to={`/experience/${service.slug}`}
+                  className="services__arrow-link"
+                  aria-label={`Open case study: ${service.title}`}
+                >
+                  <ArrowCircle light={service.active} />
+                </Link>
               </div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>

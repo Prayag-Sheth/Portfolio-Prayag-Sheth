@@ -27,7 +27,7 @@ export function Process() {
           <h2 className="heading process__title">
             <span className="accent">How I Build</span>, Simplified.
           </h2>
-          <GlassButton variant="purple" href="#about">
+          <GlassButton variant="purple" href="#projects">
             Learn More
           </GlassButton>
         </Reveal>

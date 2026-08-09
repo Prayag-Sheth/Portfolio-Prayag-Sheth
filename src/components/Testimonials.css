@@ -39,24 +39,6 @@
   backdrop-filter: blur(10px);
 }
 
-.testimonials__card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 16px;
-}
-
-.testimonials__link-icon {
-  color: #c4c4c4;
-}
-
-.testimonials__quote {
-  font-size: 3rem;
-  line-height: 0.6;
-  color: #e5e7eb;
-  font-family: Georgia, serif;
-}
-
 .testimonials__text {
   margin: 0 0 20px;
   min-height: 110px;

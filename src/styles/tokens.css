@@ -14,7 +14,10 @@
   --glass-bg: rgba(255, 255, 255, 0.12);
   --glass-bg-strong: rgba(255, 255, 255, 0.18);
   --glass-border: rgba(255, 255, 255, 0.28);
-  --glass-blur: 16px;
+  --glass-blur: 20px;
+  --nav-glass-bg: rgba(20, 16, 28, 0.55);
+  --nav-glass-bg-scrolled: rgba(20, 16, 28, 0.62);
+  --nav-z: 1000;
   --glass-light-bg: rgba(255, 255, 255, 0.72);
   --glass-light-border: rgba(0, 0, 0, 0.08);
 

@@ -11,11 +11,12 @@ export function Blog() {
         <Reveal>
           <p className="blog__eyebrow">Projects</p>
           <h2 className="heading blog__title">
-            Selected Work &amp; <span className="accent">Impact</span>
+            Independent Work &amp; <span className="accent">Learning</span>
           </h2>
           <p className="muted blog__subtitle">
-            Enterprise Kafka pipelines, multi-platform order sync, and Excel
-            automation that cut report time from hours to seconds.
+            Personal and hackathon work outside day-to-day role delivery —
+            from SIH hardware prototyping to an LLM-powered insights platform
+            under active development.
           </p>
         </Reveal>
 
@@ -23,9 +24,26 @@ export function Blog() {
           {blogPosts.map((post) => (
             <article key={post.title} className="blog__card">
               <img src={post.image} alt="" loading="lazy" decoding="async" />
-              <time>{post.date}</time>
+              <div className="blog__card-meta">
+                <time>{post.date}</time>
+                {post.badge ? (
+                  <span className="blog__badge">{post.badge}</span>
+                ) : null}
+              </div>
               <h3>{post.title}</h3>
+              {post.tech ? <p className="blog__tech">{post.tech}</p> : null}
               <p>{post.excerpt}</p>
+              {post.links && post.links.length > 0 ? (
+                <ul className="blog__links">
+                  {post.links.map((link) => (
+                    <li key={link.href}>
+                      <a href={link.href} target="_blank" rel="noreferrer">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </article>
           ))}
         </Reveal>

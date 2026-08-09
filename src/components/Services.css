@@ -13,7 +13,7 @@
 
 .services__title {
   font-size: clamp(1.85rem, 3vw, 2.6rem);
-  max-width: 16ch;
+  max-width: 14ch;
 }
 
 .services__intro {
@@ -87,6 +87,19 @@
   border-radius: 50%;
   background: #f3f4f6;
   color: var(--color-charcoal);
+  transition:
+    transform 0.25s var(--ease),
+    background 0.25s var(--ease);
+}
+
+.services__arrow-link {
+  display: inline-flex;
+  border-radius: 50%;
+}
+
+.services__arrow-link:hover .services__arrow,
+.services__arrow-link:focus-visible .services__arrow {
+  transform: translateX(2px);
 }
 
 .services__arrow--light {
