@@ -1,14 +1,23 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 import "./GlassButton.css";
 
 type Variant = "glass" | "purple" | "glass-light";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+type CommonProps = {
   variant?: Variant;
   children: ReactNode;
   withArrow?: boolean;
+  className?: string;
   href?: string;
 };
+
+type Props = CommonProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "className"> &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children" | "className" | "href" | "type">;
 
 function ArrowIcon() {
   return (
@@ -30,6 +39,7 @@ export function GlassButton({
   withArrow = true,
   className = "",
   href,
+  type: _type,
   ...rest
 }: Props) {
   const classes = `glass-btn glass-btn--${variant} ${className}`.trim();
@@ -48,15 +58,15 @@ export function GlassButton({
   if (href) {
     const external = href.startsWith("http");
     const isPdf = href.endsWith(".pdf");
-    const { type: _type, ...anchorRest } = rest;
+    const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
       <a
         className={classes}
         href={href}
         target={external || isPdf ? "_blank" : undefined}
         rel={external || isPdf ? "noreferrer" : undefined}
-        download={isPdf ? true : undefined}
-        {...anchorRest}
+        {...anchorProps}
+        download={isPdf ? true : anchorProps.download}
       >
         {inner}
       </a>
@@ -64,7 +74,11 @@ export function GlassButton({
   }
 
   return (
-    <button type="button" className={classes} {...rest}>
+    <button
+      type="button"
+      className={classes}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {inner}
     </button>
   );
