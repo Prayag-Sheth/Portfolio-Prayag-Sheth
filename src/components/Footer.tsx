@@ -125,18 +125,22 @@ export function Footer() {
           style={{ "--wm-progress": 0 } as CSSProperties}
         >
           <span className="footer__wordmark-first" aria-hidden="true">
-            {firstName.split("").map((letter, index) => (
-              <span
-                key={`f-${letter}-${index}`}
-                className="footer__letter footer__letter--first"
-                data-wm-letter
-                data-delay={prayagDelay(index)}
-                data-window={PRAYAG_WINDOW}
-                style={{ "--p": 0 } as CSSProperties}
-              >
-                {letter}
-              </span>
-            ))}
+            {firstName.split("").map((letter, index) => {
+              const lower = letter.toLowerCase();
+              const isDescender = lower === "y" || lower === "g";
+              return (
+                <span
+                  key={`f-${letter}-${index}`}
+                  className={`footer__letter footer__letter--first${isDescender ? " footer__letter--descender" : ""}`}
+                  data-wm-letter
+                  data-delay={prayagDelay(index)}
+                  data-window={PRAYAG_WINDOW}
+                  style={{ "--p": 0 } as CSSProperties}
+                >
+                  {letter}
+                </span>
+              );
+            })}
           </span>
           <span className="footer__wordmark-fade" aria-hidden="true">
             {lastName.split("").map((letter, index) => (
@@ -154,7 +158,7 @@ export function Footer() {
           </span>
         </h2>
 
-        <Reveal className="footer__bottom" delay={80}>
+        <div className="footer__bottom">
           <div className="footer__legal-left">
             <span>© 2026 {profile.name}</span>
             <a href={`tel:${profile.phone.replace(/\s/g, "")}`}>
@@ -194,7 +198,7 @@ export function Footer() {
             <span>{profile.location}</span>
             <a href={profile.resumeUrl}>Resume</a>
           </div>
-        </Reveal>
+        </div>
       </div>
     </footer>
   );

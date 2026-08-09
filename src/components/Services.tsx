@@ -7,10 +7,15 @@ import {
   type MouseEvent,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCaseStudyBySlug } from "../data/caseStudies";
 import { profile, services } from "../data/content";
 import { GlassButton } from "./GlassButton";
 import { Reveal } from "./Reveal";
 import "./Services.css";
+
+function hasPublishedCaseStudy(slug: string) {
+  return Boolean(getCaseStudyBySlug(slug)?.content);
+}
 
 function smoothstep(t: number) {
   const x = Math.min(1, Math.max(0, t));
@@ -214,14 +219,16 @@ export function Services() {
               <div className="services__card-surface">
                 <div className="services__card-top">
                   <span className="services__date">{service.date}</span>
-                  <button
-                    type="button"
-                    className="services__arrow-link"
-                    aria-label={`Open case study: ${service.title}`}
-                    onClick={(event) => openCaseStudy(event, service.slug)}
-                  >
-                    <ArrowCircle light={service.active} />
-                  </button>
+                  {hasPublishedCaseStudy(service.slug) ? (
+                    <button
+                      type="button"
+                      className="services__arrow-link"
+                      aria-label={`Open case study: ${service.title}`}
+                      onClick={(event) => openCaseStudy(event, service.slug)}
+                    >
+                      <ArrowCircle light={service.active} />
+                    </button>
+                  ) : null}
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>

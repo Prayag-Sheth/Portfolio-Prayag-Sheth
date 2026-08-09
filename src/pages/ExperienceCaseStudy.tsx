@@ -174,20 +174,28 @@ export function ExperienceCaseStudy() {
         </Link>
 
         <header className="case-study__header">
-          <p className="section-label">Case study</p>
+          <p className="case-study__eyebrow">Case study</p>
           <h1 className="heading case-study__title">{study.title}</h1>
           <dl className="case-study__meta">
             <div>
               <dt>Role</dt>
               <dd>{study.role}</dd>
             </div>
+            {/* Timeline hidden until finalized
             <div>
               <dt>Timeline</dt>
               <dd>{study.timeline}</dd>
             </div>
+            */}
             <div>
               <dt>Stack</dt>
-              <dd>{study.stack.join(" · ")}</dd>
+              <dd>
+                <ul className="case-study__stack">
+                  {study.stack.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </dd>
             </div>
           </dl>
           <img

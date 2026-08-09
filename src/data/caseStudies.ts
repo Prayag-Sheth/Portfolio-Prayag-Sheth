@@ -63,7 +63,7 @@ const kafkaContent: CaseStudyContent = {
     layers: [
       {
         name: "Product surface",
-        role: "Angular webapp, Auth Gateway (OAuth), orchestration backend (CRUD, sync, Kafka, Prisma/MySQL)",
+        role: "React webapp, Auth Gateway (OAuth), orchestration backend (CRUD, sync, Kafka, Prisma/MySQL)",
       },
       {
         name: "ERP microservices",
@@ -78,25 +78,27 @@ const kafkaContent: CaseStudyContent = {
         role: "Reference for Kafka flows and shared integration contracts",
       },
     ],
-    flow: "App → Auth Gateway (ERP connect) → Orchestration backend → Kafka (async create/sync) → API Gateway / microservices → ERP APIs",
+    flow: "React app → Auth Gateway (connect ERP) → Orchestration API → Kafka → ERP microservices → ERP APIs",
   },
   architecture: {
-    diagram: `Webapp (Angular)
+    diagram: `Webapp (React)
     │
     ▼
-Auth Gateway  ──OAuth──► QBO (Xero / NetSuite / QBD planned)
-    │                    Separate K8s clusters (auth vs workloads)
+Auth Gateway  ──OAuth──► QuickBooks / NetSuite / Sage
+    │
     ▼
-Orchestration backend    Entity CRUD, sync, token storage, mappers
-    │                    Kafka consumer/producer · Prisma/MySQL
-    │                    Separate K8s clusters from auth
+Orchestration API        CRUD, sync, mappers, MySQL
+    │
     ▼
-API Gateway + MS         account, vendor, class, bill, payment, JE, …
-    │                    Helm umbrella chart · Docker/K8s
+Kafka                    Async create & sync messages
+    │
     ▼
-ERP APIs                 QBO · NetSuite · Sage Intacct`,
+ERP microservices        account, vendor, bill, payment, …
+    │                    Behind an API gateway
+    ▼
+ERP APIs                 QuickBooks · NetSuite · Sage Intacct`,
     messaging:
-      "Request/response Kafka topics for entity create (`*_CREATE_REQUEST` / `*_RESPONSE`), inbound sync topics, and sync-now / connection lifecycle events — so the client stays ERP-agnostic on a unified bus contract.",
+      "Kafka sits between the orchestration API and the ERP services. Creates and syncs are sent as messages on the bus; each service handles its own work and sends a result back. Connection and “sync now” events use the same pattern, so the React app never calls an ERP API directly.",
     deploy:
       "Independent Helm charts for auth vs orchestration; ERP microservices via an umbrella chart with env bifurcation across dev, staging, and prod.",
   },
@@ -119,7 +121,7 @@ ERP APIs                 QBO · NetSuite · Sage Intacct`,
     {
       challenge: "Async create/sync without blocking the app",
       decision:
-        "Kafka request/response plus connection sync lifecycle topics",
+        "Push create and sync work through Kafka so the UI stays responsive while ERP services process in the background",
     },
     {
       challenge: "Sage/NetSuite API quirks (segments, pagination, scopes)",
@@ -168,7 +170,7 @@ export const caseStudies: CaseStudyMeta[] = [
       "TypeScript",
       "Apache Kafka",
       "MySQL",
-      "Angular",
+      "React",
       "NetSuite",
       "QuickBooks Online",
       "Sage Intacct",
