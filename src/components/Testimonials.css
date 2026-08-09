@@ -31,17 +31,20 @@
 }
 
 .testimonials__card {
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
   padding: 24px;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.9);
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(10px);
 }
 
 .testimonials__text {
   margin: 0 0 20px;
-  min-height: 110px;
+  flex: 1;
+  min-height: 120px;
   color: #374151;
   line-height: 1.6;
   font-size: 0.95rem;
@@ -51,6 +54,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-top: auto;
   padding-top: 16px;
   border-top: 1px solid #eee;
 }
@@ -102,12 +106,67 @@
   color: white;
 }
 
+.testimonials__dots {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .testimonials__grid {
     grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-inline: auto;
+    /* Reserve space so autoplay / slide changes don’t shift the page */
+    min-height: 280px;
+  }
+
+  .testimonials__grid--mobile .testimonials__card {
+    min-height: 280px;
+    animation: skills-card-in 0.45s var(--ease) both;
   }
 
   .testimonials__text {
-    min-height: 0;
+    min-height: 140px;
+  }
+
+  .testimonials__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    min-height: 8px;
+  }
+
+  .testimonials__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: #d1d5db;
+    transition:
+      transform 0.25s var(--ease),
+      background 0.25s var(--ease);
+  }
+
+  .testimonials__dot--active {
+    background: var(--color-purple);
+    transform: scale(1.25);
+  }
+}
+
+@keyframes skills-card-in {
+  from {
+    opacity: 0;
+    transform: translate3d(12px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials__grid--mobile .testimonials__card {
+    animation: none;
   }
 }

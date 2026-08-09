@@ -17,12 +17,18 @@
   margin-bottom: 24px;
 }
 
+.case-study__shell {
+  animation: case-study-shell-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .case-study__back {
   display: inline-flex;
   margin-bottom: 28px;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-purple);
+  animation: case-study-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.04s;
 }
 
 .case-study__back:hover,
@@ -32,6 +38,8 @@
 
 .case-study__header {
   margin-bottom: 28px;
+  animation: case-study-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.1s;
 }
 
 .case-study__title {
@@ -70,6 +78,46 @@
   object-position: center;
   border-radius: var(--radius-lg);
   background: #0a0a0c;
+  transform-origin: center top;
+  animation: case-study-hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.16s;
+}
+
+.case-study__sections,
+.case-study__pending-banner {
+  animation: case-study-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.28s;
+}
+
+@keyframes case-study-shell-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes case-study-item-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes case-study-hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .case-study__pending-banner {
@@ -200,5 +248,38 @@
 
   .case-study__table tbody th {
     width: auto;
+  }
+
+  @keyframes case-study-item-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes case-study-hero-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study__shell,
+  .case-study__back,
+  .case-study__header,
+  .case-study__hero-img,
+  .case-study__sections,
+  .case-study__pending-banner {
+    animation: none !important;
   }
 }

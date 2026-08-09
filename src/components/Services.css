@@ -11,6 +11,14 @@
   margin-bottom: 36px;
 }
 
+.services__header-copy {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: flex-end;
+  width: 100%;
+}
+
 .services__title {
   font-size: clamp(1.85rem, 3vw, 2.6rem);
   max-width: 14ch;
@@ -27,32 +35,49 @@
 }
 
 .services__grid {
+  --grid-progress: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
 
 .services__card {
+  --card-i: 0;
+  --p: 0;
   display: flex;
   flex-direction: column;
+  min-height: 420px;
+  opacity: calc(0.2 + var(--p) * 0.8);
+  transform: translate3d(0, calc((1 - var(--p)) * 48px), 0)
+    scale(calc(0.92 + var(--p) * 0.08));
+  filter: blur(calc((1 - var(--p)) * 14px));
+  will-change: transform, opacity, filter;
+}
+
+.services__card-surface {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   min-height: 420px;
   padding: 18px;
   border-radius: var(--radius-lg);
   background: var(--color-white);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
+  transform-origin: center top;
+  transform: rotateX(calc((1 - var(--p)) * 12deg))
+    translateY(calc((1 - var(--p)) * 8px));
   transition:
-    transform 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
+    box-shadow 0.4s var(--ease),
+    border-color 0.35s var(--ease);
 }
 
-.services__card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-soft);
-}
-
-.services__card--active {
-  background: linear-gradient(165deg, var(--color-purple) 0%, var(--color-purple-deep) 100%);
+.services__card--active .services__card-surface {
+  background: linear-gradient(
+    165deg,
+    var(--color-purple) 0%,
+    var(--color-purple-deep) 100%
+  );
   border-color: transparent;
   color: var(--color-white);
 }
@@ -88,18 +113,20 @@
   background: #f3f4f6;
   color: var(--color-charcoal);
   transition:
-    transform 0.25s var(--ease),
-    background 0.25s var(--ease);
+    transform 0.3s var(--ease),
+    background 0.3s var(--ease);
 }
 
 .services__arrow-link {
   display: inline-flex;
   border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
 }
 
 .services__arrow-link:hover .services__arrow,
 .services__arrow-link:focus-visible .services__arrow {
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 .services__arrow--light {
@@ -112,6 +139,7 @@
   font-size: 1.35rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  transition: transform 0.35s var(--ease);
 }
 
 .services__card p {
@@ -120,18 +148,78 @@
   line-height: 1.55;
   color: var(--color-muted);
   flex: 1;
+  transition: transform 0.35s var(--ease);
 }
 
 .services__card--active p {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.services__card img {
+.services__media {
+  margin-top: auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  line-height: 0;
+  opacity: calc(0.35 + var(--p) * 0.65);
+  transform: translate3d(0, calc((1 - var(--p)) * 16px), 0)
+    scale(calc(0.96 + var(--p) * 0.04));
+}
+
+.services__media img {
   width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: var(--radius-md);
-  margin-top: auto;
+  transition: transform 0.55s var(--ease);
+}
+
+.services--blur {
+  perspective: 1100px;
+}
+
+.services--blur .services__card:hover .services__card-surface {
+  box-shadow: var(--shadow-float);
+  border-color: rgba(120, 88, 203, 0.22);
+}
+
+.services--blur .services__card--active:hover .services__card-surface {
+  border-color: transparent;
+}
+
+.services--blur .services__card:hover .services__media img {
+  transform: scale(1.06);
+}
+
+.services--blur .services__card:hover h3,
+.services--blur .services__card:hover p {
+  transform: translateY(-2px);
+}
+
+/* Arrow → case study open (brief lift before navigate) */
+.services__card--opening {
+  z-index: 4;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: translate3d(0, -10px, 0) scale(1.03) !important;
+  transition:
+    transform 0.32s var(--ease),
+    opacity 0.32s var(--ease),
+    filter 0.32s var(--ease);
+}
+
+.services__card--opening .services__card-surface {
+  transform: none;
+  box-shadow: var(--shadow-float);
+  border-color: rgba(120, 88, 203, 0.35);
+}
+
+.services__card--opening .services__media {
+  opacity: 1;
+  transform: none;
+}
+
+.services__card--opening .services__arrow {
+  transform: translateX(4px) scale(1.08);
 }
 
 .services__cta {
@@ -147,7 +235,8 @@
 }
 
 @media (max-width: 900px) {
-  .services__header {
+  .services__header,
+  .services__header-copy {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -160,5 +249,45 @@
 @media (max-width: 600px) {
   .services__grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Much smaller motion so it reads on-screen, not finished off-screen */
+  .services__card {
+    opacity: calc(0.35 + var(--p) * 0.65);
+    transform: translate3d(0, calc((1 - var(--p)) * 18px), 0)
+      scale(calc(0.97 + var(--p) * 0.03));
+    filter: blur(calc((1 - var(--p)) * 5px));
+  }
+
+  .services__card-surface {
+    transform: rotateX(calc((1 - var(--p)) * 5deg));
+  }
+
+  .services__media {
+    opacity: calc(0.55 + var(--p) * 0.45);
+    transform: translate3d(0, calc((1 - var(--p)) * 8px), 0);
+  }
+
+  .services__card--opening {
+    transform: translate3d(0, -4px, 0) scale(1.015) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__card {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .services__card-surface,
+  .services__media,
+  .services__media img,
+  .services__card h3,
+  .services__card p,
+  .services__arrow {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

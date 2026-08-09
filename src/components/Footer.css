@@ -1,6 +1,7 @@
 .footer {
   padding: 64px 0 32px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .footer__nav {
@@ -63,18 +64,55 @@
 }
 
 .footer__wordmark {
+  --wm-progress: 0;
   margin: 0 0 40px;
   font-size: clamp(3.5rem, 12vw, 8.5rem);
   font-weight: 800;
   letter-spacing: -0.06em;
-  line-height: 0.9;
+  line-height: 0.95;
   white-space: nowrap;
   color: #2a2a2a;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.footer__wordmark-first {
+  display: inline;
+  color: #2a2a2a;
 }
 
 .footer__wordmark-fade {
   color: #d4d4d4;
+}
+
+.footer__letter {
+  --p: 0;
+  display: inline-block;
+  /* Wide travel + soft opacity = continuous wave, not pops */
+  transform: translate3d(0, calc((1 - var(--p)) * 0.95em), 0);
+  opacity: calc(0.12 + var(--p) * 0.88);
+  will-change: transform, opacity;
+}
+
+.footer__letter--first {
+  /* Prayag rises from a bit less deep so it feels quicker / lighter */
+  transform: translate3d(0, calc((1 - var(--p)) * 0.72em), 0);
+}
+
+.footer__letter--last {
+  transform: translate3d(0, calc((1 - var(--p)) * 1.05em), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__wordmark {
+    --wm-progress: 1;
+  }
+
+  .footer__letter {
+    --p: 1;
+    transform: none;
+    opacity: 1;
+    will-change: auto;
+  }
 }
 
 .footer__bottom {
@@ -150,5 +188,18 @@
 
   .footer__wordmark {
     font-size: clamp(2.8rem, 16vw, 5rem);
+  }
+
+  .footer__letter {
+    transform: translate3d(0, calc((1 - var(--p)) * 0.45em), 0);
+    opacity: calc(0.25 + var(--p) * 0.75);
+  }
+
+  .footer__letter--first {
+    transform: translate3d(0, calc((1 - var(--p)) * 0.32em), 0);
+  }
+
+  .footer__letter--last {
+    transform: translate3d(0, calc((1 - var(--p)) * 0.5em), 0);
   }
 }

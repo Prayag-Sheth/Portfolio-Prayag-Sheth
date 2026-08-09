@@ -48,6 +48,7 @@ export function GlassButton({
   if (href) {
     const external = href.startsWith("http");
     const isPdf = href.endsWith(".pdf");
+    const { type: _type, ...anchorRest } = rest;
     return (
       <a
         className={classes}
@@ -55,6 +56,7 @@ export function GlassButton({
         target={external || isPdf ? "_blank" : undefined}
         rel={external || isPdf ? "noreferrer" : undefined}
         download={isPdf ? true : undefined}
+        {...anchorRest}
       >
         {inner}
       </a>

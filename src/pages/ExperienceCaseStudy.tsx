@@ -168,7 +168,7 @@ export function ExperienceCaseStudy() {
 
   return (
     <main className="case-study">
-      <div className="container">
+      <div className="container case-study__shell" key={study.slug}>
         <Link className="case-study__back" to="/#experience">
           ← Back to Experience
         </Link>

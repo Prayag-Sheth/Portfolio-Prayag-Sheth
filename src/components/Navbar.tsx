@@ -15,6 +15,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("/#home");
 
+  const closeMenu = () => setOpen(false);
+
   useEffect(() => {
     if (location.pathname !== "/") {
       setActive("");
@@ -46,10 +48,35 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    closeMenu();
+  }, [location.pathname]);
+
   return (
-    <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
+    <header className={`navbar ${scrolled ? "navbar--scrolled" : ""} ${open ? "navbar--menu-open" : ""}`}>
+      {open ? (
+        <button
+          type="button"
+          className="navbar__backdrop"
+          aria-label="Close menu"
+          onClick={closeMenu}
+        />
+      ) : null}
+
       <div className="navbar__inner">
-        <a className="navbar__brand" href="/#home" onClick={() => setOpen(false)}>
+        <a className="navbar__brand" href="/#home" onClick={closeMenu}>
           <span className="navbar__mark" aria-hidden />
           <span>{profile.name}</span>
         </a>
@@ -60,7 +87,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={`navbar__link ${active === link.href ? "navbar__link--active" : ""}`}
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               {link.label}
             </a>
@@ -70,6 +97,7 @@ export function Navbar() {
             variant="glass"
             withArrow={false}
             href="/#contact"
+            onClick={closeMenu}
           >
             Get in Touch
           </GlassButton>

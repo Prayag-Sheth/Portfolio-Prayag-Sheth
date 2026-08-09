@@ -114,16 +114,405 @@
   background: #f3f4f6;
 }
 
-.process__media img {
+.process__media-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+  text-align: left;
+  position: relative;
+}
+
+.process__media-open img {
   display: block;
   width: 100%;
   height: auto;
   object-fit: contain;
   object-position: center top;
   border-radius: 0;
-  /* Nudge the duplicate in-image title just out of view */
   margin-top: -5.5%;
   margin-bottom: -0.5%;
+}
+
+.process__media-hint {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(20, 16, 28, 0.72);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* ——— Interactive tour lightbox ——— */
+.process__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(120, 88, 203, 0.28), transparent 50%),
+    rgba(8, 6, 12, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.process__lightbox-panel {
+  width: min(1100px, 100%);
+  max-height: min(94vh, 100%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #17141f 0%, #0f0d14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #fff;
+}
+
+.process__tour-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 10px;
+}
+
+.process__tour-eyebrow {
+  margin: 0 0 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.process__tour-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.process__lightbox-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  line-height: 0;
+}
+
+.process__lightbox-close svg {
+  display: block;
+}
+
+.process__tour-stage {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+  padding: 8px 16px 0;
+}
+
+.process__tour-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: min(52vh, 480px);
+  border-radius: 18px;
+  background: #0a0a0c;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.process__tour-back {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: zoom-out;
+  overflow: hidden;
+  container-type: size;
+}
+
+.process__tour-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.55s var(--ease);
+}
+
+/* Exact panel zoom (full section). Thin neighbor cutoffs get mild blur only. */
+.process__tour-stage[data-focus="0"] {
+  --vx: 1.25;
+  --vy: 14.75;
+  --vw: 31.25;
+  --vh: 66.25;
+  --sharp-a: 0;
+  --sharp-b: 92;
+}
+
+.process__tour-stage[data-focus="1"] {
+  --vx: 32.5;
+  --vy: 14.75;
+  --vw: 30.63;
+  --vh: 66.25;
+  --sharp-a: 8;
+  --sharp-b: 92;
+}
+
+.process__tour-stage[data-focus="2"] {
+  --vx: 62.5;
+  --vy: 14.75;
+  --vw: 36.25;
+  --vh: 66.25;
+  --sharp-a: 6;
+  --sharp-b: 100;
+}
+
+.process__tour-stage:not([data-focus="full"]) .process__tour-img--focus,
+.process__tour-stage:not([data-focus="full"]) .process__tour-img--blur {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  max-width: none;
+  height: calc(100% * 100 / var(--vh));
+  object-fit: unset;
+  transform: translate(
+    calc((var(--vx) + var(--vw) / 2) * -1%),
+    calc((var(--vy) + var(--vh) / 2) * -1%)
+  );
+}
+
+.process__tour-img--focus {
+  z-index: 0;
+}
+
+/* Mild blur only on the thin neighbor strips at the edges */
+.process__tour-img--blur {
+  z-index: 1;
+  filter: blur(5px) brightness(0.97);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(var(--sharp-a) * 1%),
+    transparent calc(var(--sharp-a) * 1% + 5%),
+    transparent calc(var(--sharp-b) * 1% - 5%),
+    #000 calc(var(--sharp-b) * 1%),
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(var(--sharp-a) * 1%),
+    transparent calc(var(--sharp-a) * 1% + 5%),
+    transparent calc(var(--sharp-b) * 1% - 5%),
+    #000 calc(var(--sharp-b) * 1%),
+    #000 100%
+  );
+}
+
+.process__tour-stage[data-focus="full"] .process__tour-frame {
+  height: auto;
+  overflow: visible;
+}
+
+.process__tour-map {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.process__tour-stage[data-focus="full"] .process__tour-img {
+  position: static;
+  left: auto;
+  top: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: unset;
+  transform: none;
+  object-position: center;
+}
+
+.process__tour-hotspots {
+  position: absolute;
+  inset: 0;
+  touch-action: manipulation;
+}
+
+.process__tour-hotspot {
+  position: absolute;
+  display: grid;
+  place-items: start center;
+  padding: 10% 8px 8px;
+  margin: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  transition:
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+.process__tour-hotspot:hover,
+.process__tour-hotspot:focus-visible {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(167, 139, 250, 0.85);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 0 2px rgba(139, 92, 246, 0.35);
+  outline: none;
+}
+
+.process__tour-hotspot-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.82);
+  color: #1e1b2e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 18px rgba(15, 12, 28, 0.18);
+  pointer-events: none;
+}
+
+.process__tour-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(8, 6, 12, 0.35) 100%
+  );
+}
+
+.process__tour-scroll-hint {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.process__tour-footer {
+  display: grid;
+  gap: 14px;
+  padding: 14px 16px 16px;
+}
+
+.process__tour-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.process__tour-kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+
+.process__tour-copy strong {
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.process__tour-copy p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 52ch;
+}
+
+.process__tour-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.process__tour-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.process__tour-tab {
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.process__tour-tab--active {
+  background: rgba(120, 88, 203, 0.9);
+  border-color: transparent;
+  color: #fff;
+}
+
+.process__tour-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.process__tour-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.process__tour-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.process__tour-nav-btn--next {
+  background: rgba(120, 88, 203, 0.85);
+  border-color: transparent;
 }
 
 @media (max-width: 900px) {
@@ -136,4 +525,105 @@
     grid-template-columns: 1fr;
   }
 
+  .process__lightbox {
+    padding: 0;
+    place-items: stretch;
+  }
+
+  .process__lightbox-panel {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .process__tour-stage {
+    min-height: 0;
+    padding: 0 12px;
+  }
+
+  .process__tour-frame {
+    height: min(48dvh, 420px);
+  }
+
+  /* Phone: same crops; Develop uses width-fit so full card shows (like PC) */
+  .process__tour-stage[data-focus="0"] {
+    --vx: 1.25;
+    --vy: 14.75;
+    --vw: 31.25;
+    --vh: 66.25;
+  }
+
+  .process__tour-stage[data-focus="1"] {
+    --vx: 32.5;
+    --vy: 14.75;
+    --vw: 30.63;
+    --vh: 66.25;
+  }
+
+  .process__tour-stage[data-focus="2"] {
+    --vx: 62.5;
+    --vy: 14.75;
+    --vw: 36.25;
+    --vh: 66.25;
+  }
+
+  .process__tour-stage[data-focus="2"] .process__tour-img--focus {
+    height: auto;
+    width: calc(100cqw * 100 / var(--vw));
+  }
+
+  .process__tour-img--blur {
+    display: none;
+  }
+
+  /* Phone full map: zoomed height-fill + sideways scroll (as before) */
+  .process__tour-stage[data-focus="full"] .process__tour-frame {
+    height: min(48dvh, 420px);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .process__tour-map {
+    width: max-content;
+    height: 100%;
+  }
+
+  .process__tour-stage[data-focus="full"] .process__tour-img {
+    width: auto;
+    height: min(48dvh, 420px);
+  }
+
+  .process__tour-hotspot-label {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .process__tour-tabs {
+    width: 100%;
+  }
+
+  .process__tour-tab {
+    flex: 1 1 calc(50% - 6px);
+    text-align: center;
+  }
+
+  .process__tour-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .process__tour-nav {
+    justify-content: flex-end;
+  }
+
+  .process__media-hint {
+    font-size: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process__tour-img {
+    transition: none;
+  }
 }
