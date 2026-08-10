@@ -128,10 +128,13 @@ export function Footer() {
             {firstName.split("").map((letter, index) => {
               const lower = letter.toLowerCase();
               const isDescender = lower === "y" || lower === "g";
+              const descenderClass = isDescender
+                ? ` footer__letter--descender${lower === "y" ? " footer__letter--y" : ""}`
+                : "";
               return (
                 <span
                   key={`f-${letter}-${index}`}
-                  className={`footer__letter footer__letter--first${isDescender ? " footer__letter--descender" : ""}`}
+                  className={`footer__letter footer__letter--first${descenderClass}`}
                   data-wm-letter
                   data-delay={prayagDelay(index)}
                   data-window={PRAYAG_WINDOW}

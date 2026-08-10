@@ -86,7 +86,7 @@
   scrollbar-width: none;
 }
 
-/* Full-footer rule (container width), not letter-width only */
+/* Full-footer rule — above cropped letters so gutters stay filled */
 .footer__wordmark::after {
   content: "";
   position: absolute;
@@ -96,7 +96,7 @@
   height: 1px;
   background: var(--wm-rule);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .footer__wordmark::-webkit-scrollbar {
@@ -118,7 +118,7 @@
   --scale: 1;
   display: inline-block;
   position: relative;
-  z-index: 1;
+  z-index: 0;
   /* Hard editorial crop through the bottoms of non-descenders */
   height: var(--wm-crop);
   overflow: hidden;
@@ -140,8 +140,8 @@
 }
 
 /*
-  y / g: light tip crop; knock out the full-width rule under their
-  advance so the line gaps cleanly and does not cut the glyphs.
+  y / g: above the rule so only glyph ink covers it — line stays
+  continuous through a→y / y→a / a→g gutters (no white stroke gaps).
 */
 .footer__letter--descender {
   --rise: 0.68em;
@@ -150,20 +150,12 @@
   height: 0.93em;
   overflow: hidden;
   z-index: 2;
-  isolation: isolate;
   transform-origin: center bottom;
 }
 
-.footer__letter--descender::before {
-  content: "";
-  position: absolute;
-  left: -0.08em;
-  right: -0.08em;
-  top: calc(var(--wm-crop) - 2px);
-  height: 5px;
-  background: var(--color-white);
-  pointer-events: none;
-  z-index: -1;
+/* Extra descender length so “y” reads as y, not v */
+.footer__letter--y {
+  height: 0.98em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -285,5 +277,9 @@
     height: 0.93em;
     overflow: hidden;
     transform-origin: center bottom;
+  }
+
+  .footer__letter--y {
+    height: 0.98em;
   }
 }
